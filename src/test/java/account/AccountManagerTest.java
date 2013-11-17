@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +31,7 @@ public class AccountManagerTest {
 
     @Before
     public void authenticate() throws Exception {
-        Authentication authenticate = authenticationManager.authenticate(new TestingAuthenticationToken("Agim Emruli", "secret", "ROLE_USER"));
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("agim", "secret"));
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authenticate);
         SecurityContextHolder.setContext(context);

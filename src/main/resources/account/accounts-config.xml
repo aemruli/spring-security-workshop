@@ -10,10 +10,10 @@
     <security:global-method-security secured-annotations="enabled"/>
 
     <security:authentication-manager>
-        <security:authentication-provider ref="testingAuthenticationProvider"/>
+        <security:authentication-provider user-service-ref="userDetailsService"/>
     </security:authentication-manager>
 
-    <bean id="testingAuthenticationProvider"
-          class="org.springframework.security.authentication.TestingAuthenticationProvider"/>
-
+    <security:user-service id="userDetailsService">
+        <security:user name="agim" authorities="ROLE_USER" password="secret"/>
+    </security:user-service>
 </beans>
