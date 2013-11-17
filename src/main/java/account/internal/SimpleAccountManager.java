@@ -29,7 +29,7 @@ public class SimpleAccountManager implements AccountManager {
         return new Account(source.getAccountId(), source.getFirstName(), source.getLastName());
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     @Override
     public void storeAccount(Account account) {
         accounts.put(account.getAccountId(), account);

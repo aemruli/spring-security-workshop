@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -16,13 +16,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.0
  */
 @Component
-public class SimpleUserDetailsService implements UserDetailsService{
+public class SimpleUserDetailsService implements UserDetailsService {
 
     private final ConcurrentHashMap<String, UserDetails> users = new ConcurrentHashMap<String, UserDetails>();
 
     @PostConstruct
     public void initializeUsers() {
-        users.put("agim", new User("agim", "dadacb850ece4991a835177831d1fb35", Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))));
+        users.put("agim", new User("agim", "dadacb850ece4991a835177831d1fb35",
+                Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"))));
     }
 
     @Override

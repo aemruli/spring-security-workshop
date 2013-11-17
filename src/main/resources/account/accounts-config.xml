@@ -7,32 +7,22 @@
 
     <context:component-scan base-package="account"/>
 
-    <security:global-method-security secured-annotations="enabled"/>
+    <security:global-method-security secured-annotations="enabled" access-decision-manager-ref="accessDecisionManager"/>
 
     <security:authentication-manager>
-        <security:authentication-provider ref="customLdap" />
+        <security:authentication-provider user-service-ref="simpleUserDetailsService">
+            <security:password-encoder hash="md5">
+                <security:salt-source user-property="username"/>
+            </security:password-encoder>
+        </security:authentication-provider>
     </security:authentication-manager>
 
-    <bean id="customLdap" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
-        <constructor-arg>
-            <bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
-                <constructor-arg ref="server"/>
-                <property name="userSearch">
-                    <bean class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
-                        <constructor-arg name="contextSource" ref="server"/>
-                        <constructor-arg name="searchBase" value=""/>
-                        <constructor-arg name="searchFilter" value="uid={0}"/>
-                    </bean>
-                </property>
-            </bean>
-        </constructor-arg>
-        <constructor-arg>
-            <bean class="org.springframework.security.ldap.authentication.UserDetailsServiceLdapAuthoritiesPopulator">
-                <constructor-arg ref="simpleUserDetailsService"/>
-            </bean>
-        </constructor-arg>
 
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+            </list>
+        </constructor-arg>
     </bean>
-
-    <security:ldap-server ldif="account/users.ldif" id="server" root="dc=mimacom,dc=com"/>
 </beans>
