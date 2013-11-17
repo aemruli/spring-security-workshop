@@ -12,12 +12,12 @@
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsService">
             <security:password-encoder hash="md5">
-                <security:salt-source system-wide="verySecret"/>
+                <security:salt-source user-property="username"/>
             </security:password-encoder>
         </security:authentication-provider>
     </security:authentication-manager>
 
     <security:user-service id="userDetailsService">
-        <security:user name="agim" authorities="ROLE_USER" password="69819676c786fc8d36f1365e7cf07d2c"/>
+        <security:user name="agim" authorities="ROLE_USER" password="dadacb850ece4991a835177831d1fb35"/>
     </security:user-service>
 </beans>
