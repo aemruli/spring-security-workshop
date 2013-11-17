@@ -16,10 +16,3 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 uid: agim
 userPassword: secret
-
-dn: cn=user,ou=groups,dc=mimacom,dc=com
-objectClass: groupOfNames
-objectClass: top
-cn: user
-description: Application users
-uniquemember: uid=agim,ou=people,dc=mimacom,dc=com

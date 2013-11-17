@@ -10,8 +10,29 @@
     <security:global-method-security secured-annotations="enabled"/>
 
     <security:authentication-manager>
-        <security:ldap-authentication-provider server-ref="server" />
+        <security:authentication-provider ref="customLdap" />
     </security:authentication-manager>
+
+    <bean id="customLdap" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+        <constructor-arg>
+            <bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+                <constructor-arg ref="server"/>
+                <property name="userSearch">
+                    <bean class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+                        <constructor-arg name="contextSource" ref="server"/>
+                        <constructor-arg name="searchBase" value=""/>
+                        <constructor-arg name="searchFilter" value="uid={0}"/>
+                    </bean>
+                </property>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="org.springframework.security.ldap.authentication.UserDetailsServiceLdapAuthoritiesPopulator">
+                <constructor-arg ref="simpleUserDetailsService"/>
+            </bean>
+        </constructor-arg>
+
+    </bean>
 
     <security:ldap-server ldif="account/users.ldif" id="server" root="dc=mimacom,dc=com"/>
 </beans>
