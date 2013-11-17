@@ -55,6 +55,21 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-server-jndi</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jcl</artifactId>
+            <version>1.5.6</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>spring-security-workshop</finalName>

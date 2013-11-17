@@ -10,10 +10,8 @@
     <security:global-method-security secured-annotations="enabled"/>
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="simpleUserDetailsService">
-            <security:password-encoder hash="md5">
-                <security:salt-source user-property="username"/>
-            </security:password-encoder>
-        </security:authentication-provider>
+        <security:ldap-authentication-provider server-ref="server" />
     </security:authentication-manager>
+
+    <security:ldap-server ldif="account/users.ldif" id="server" root="dc=mimacom,dc=com"/>
 </beans>
