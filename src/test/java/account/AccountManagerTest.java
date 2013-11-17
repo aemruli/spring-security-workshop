@@ -1,10 +1,17 @@
 package account;
 
 import account.domain.Account;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,6 +25,22 @@ public class AccountManagerTest {
 
     @Autowired
     private AccountManager accountManager;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Before
+    public void authenticate() throws Exception {
+        Authentication authenticate = authenticationManager.authenticate(new TestingAuthenticationToken("Agim Emruli", "secret", "ROLE_USER"));
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authenticate);
+        SecurityContextHolder.setContext(context);
+    }
+
+    @After
+    public void logout() throws Exception {
+        SecurityContextHolder.clearContext();
+    }
 
     @Test
     public void getAccountById_initializedAccount_returnedById() throws Exception {
