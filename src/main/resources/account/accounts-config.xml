@@ -7,7 +7,7 @@
 
     <context:component-scan base-package="account"/>
 
-    <security:global-method-security secured-annotations="enabled" access-decision-manager-ref="accessDecisionManager"/>
+    <security:global-method-security pre-post-annotations="enabled"/>
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="simpleUserDetailsService">
@@ -16,13 +16,4 @@
             </security:password-encoder>
         </security:authentication-provider>
     </security:authentication-manager>
-
-
-    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
-        <constructor-arg>
-            <list>
-                <bean class="org.springframework.security.access.vote.RoleVoter"/>
-            </list>
-        </constructor-arg>
-    </bean>
 </beans>
