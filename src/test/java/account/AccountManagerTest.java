@@ -59,7 +59,7 @@ public class AccountManagerTest {
     @Test
     public void storeAccount_passedAccount_availableAfterStore() throws Exception {
         //Arrange
-        Account account = new Account("2", "Steve", "Jobs");
+        Account account = new Account("2", "Steve", "Jobs", "agim");
 
         //Act
         accountManager.storeAccount(account);

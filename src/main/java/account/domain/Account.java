@@ -9,11 +9,13 @@ public class Account {
     private final String accountId;
     private final String firstName;
     private final String lastName;
+    private final String owner;
 
-    public Account(String accountId, String firstName, String lastName) {
+    public Account(String accountId, String firstName, String lastName, String owner) {
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.owner = owner;
     }
 
     public String getAccountId() {
@@ -26,6 +28,10 @@ public class Account {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 
     @Override
