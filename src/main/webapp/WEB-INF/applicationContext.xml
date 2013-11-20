@@ -7,7 +7,7 @@
     <import resource="classpath:/account/accounts-config.xml"/>
 
     <security:http>
-        <security:form-login/>
+        <security:x509 user-service-ref="simpleUserDetailsService"/>
         <security:intercept-url pattern="/**" access="ROLE_USER"/>
     </security:http>
 
